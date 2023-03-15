@@ -15,17 +15,30 @@ import java.util.Optional;
 public class ContentCollectionRepository {
     // This class will just collect some state in to memory, we are not talking to a DB yet.
 
-    private final List<Content> content = new ArrayList<>();
+    private final List<Content> contentList = new ArrayList<>();
 
     public ContentCollectionRepository() {
     }
 
     public List<Content> findAll() {
-        return content;
+        return contentList;
     }
 
     public Optional<Content> findById(Integer id) {
-        return content.stream().filter(c -> c.id().equals(id)).findFirst();
+        return contentList.stream().filter(c -> c.id().equals(id)).findFirst();
+    }
+
+    public void save(Content c) {
+        contentList.removeIf(c2 -> c2.id().equals(c.id()));
+        contentList.add(c);
+    }
+
+    public boolean existsById(Integer id) {
+        return contentList.stream().filter(c -> c.id().equals(id)).count() == 1;
+    }
+
+    public void delete(Integer id) {
+        contentList.removeIf(c2 -> c2.id().equals(id));
     }
 
     @PostConstruct
@@ -40,6 +53,6 @@ public class ContentCollectionRepository {
                 null,
                 ""
         );
-        content.add(c);
+        contentList.add(c);
     }
 }
