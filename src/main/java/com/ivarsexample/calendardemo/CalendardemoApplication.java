@@ -1,5 +1,6 @@
 package com.ivarsexample.calendardemo;
 
+import com.ivarsexample.calendardemo.config.ContentCalendarProperties;
 import com.ivarsexample.calendardemo.model.Content;
 import com.ivarsexample.calendardemo.model.Status;
 import com.ivarsexample.calendardemo.model.Type;
@@ -7,12 +8,14 @@ import com.ivarsexample.calendardemo.repository.ContentRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+@EnableConfigurationProperties(ContentCalendarProperties.class)
 @SpringBootApplication
 public class CalendardemoApplication {
 
