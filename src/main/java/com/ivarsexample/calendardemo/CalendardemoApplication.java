@@ -26,24 +26,25 @@ public class CalendardemoApplication {
 		//Note that the Message class defined as a @Component will show up as a bean definition name "message".
 	}
 
-	@Bean
-	public CommandLineRunner commandLineRunner(ContentRepository repository) {
-		// Since this method is marked with @Bean the function will automatically be executed at startup to add the returned instance to Springs pool of managed instances.
-		// Our ContentRepository is a singleton marked as a bean (by the extended class)
-		// -> the argument will be autowired.
-		return args -> {
-			System.out.println("Hi from a commandLineRunner Bean!");
-			Content content = new Content(
-					null, //auto incremented
-					"Hello Chat GPT",
-					"All about Chat GPT",
-					Status.IDEA,
-					Type.VIDEO,
-					LocalDateTime.now(),
-					null,
-					""
-			);
-			repository.save(content);
-		};
-	}
+	// We are now initializing data in the DataLoader class.
+//	@Bean
+//	public CommandLineRunner commandLineRunner(ContentRepository repository) {
+//		// Since this method is marked with @Bean the function will automatically be executed at startup to add the returned instance to Springs pool of managed instances.
+//		// Our ContentRepository is a singleton marked as a bean (by the extended class)
+//		// -> the argument will be autowired.
+//		return args -> {
+//			System.out.println("Hi from a commandLineRunner Bean!");
+//			Content content = new Content(
+//					null, //auto incremented
+//					"Hello Chat GPT",
+//					"All about Chat GPT",
+//					Status.IDEA,
+//					Type.VIDEO,
+//					LocalDateTime.now(),
+//					null,
+//					""
+//			);
+//			repository.save(content);
+//		};
+//	}
 }
