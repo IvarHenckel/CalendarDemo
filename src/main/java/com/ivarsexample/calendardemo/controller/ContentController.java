@@ -1,7 +1,9 @@
 package com.ivarsexample.calendardemo.controller;
 
 import com.ivarsexample.calendardemo.model.Content;
+import com.ivarsexample.calendardemo.model.Status;
 import com.ivarsexample.calendardemo.repository.ContentCollectionRepository;
+import com.ivarsexample.calendardemo.repository.ContentRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +18,12 @@ public class ContentController {
     // A controller simply accepts requests and returns responses
     // You typically find the CRUD methods in a Controller -> Create Read Update Delete
 
-    private final ContentCollectionRepository repository;
+    private final ContentRepository repository;
 
     // The @Autowired annotation is implicit when you only have one public constructor.
     // That will make Spring automatically inject the ContentCollectionRepository
     // instance that Spring is managing.
-    public ContentController(ContentCollectionRepository repository) {
+    public ContentController(ContentRepository repository) {
         this.repository = repository;
     }
 
@@ -40,7 +42,7 @@ public class ContentController {
     public void create(@Valid @RequestBody Content content) {
         //RequestBody tells Spring that the content is going to be sent in a request body.
         //@Valid will check that constraints like @NotBlank in Content class definition are valid.
-        //If not the caller will just get a 400 BAD REQUEST response
+        //If not the caller will just get a 400  BAD REQUEST response
         repository.save(content);
     }
 
@@ -56,6 +58,16 @@ public class ContentController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
-        repository.delete(id);
+        repository.deleteById(id);
+    }
+
+    @GetMapping("/filter/{keyword}")
+    public List<Content> findByTitle(@PathVariable String keyword) {
+        return repository.findAllByTitleContains(keyword);
+    }
+
+    @GetMapping("/filter/status/{status}")
+    public List<Content> findByStatus (@PathVariable Status status) {
+        return repository.listByStatus(status);
     }
 }

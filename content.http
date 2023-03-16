@@ -1,0 +1,40 @@
+### These http files are only supported in the paid version of IntelliJ. But still good to write down all
+### requests we have available.
+
+GET http://localhost:8080/api/content/
+
+GET http://localhost:8080/api/content/
+
+POST http://localhost:8080/api/content/
+Content-Type: application/json
+
+{
+    "id":2,
+    "title":"My Second Blog Post",
+    "desc":"My Second Blog Post",
+    "status":"IDEA",
+    "contentType":"ARTICLE",
+    "dateCreated":"2023-03-15T14:04:44.2609354",
+    "dateUpdated":null,
+    "url":""
+}
+### Again, I can't test with IntelliJ I instead used
+### curl -X POST http://localhost:8080/api/content   -H "Content-Type: application/json" -d '{"id":2, "title":"My Second Blog Post", "desc":"My Second Blog Post", "status":"IDEA", "contentType":"ARTICLE", "dateCreated":"2023-03-15T14:04:44.2609354", "dateUpdated":null, "url":""}'
+
+PUT http://localhost:8080/api/content/1
+Content-Type: application/json
+
+{
+    "id":1,
+    "title":"My First Post BOOOOIII!",
+    "desc":"My First Blog Post",
+    "status":"IDEA",
+    "contentType":"ARTICLE",
+    "dateCreated":"2023-03-15T14:04:44.2609354",
+    "dateUpdated":2023-03-15T14:04:44.2909354,
+    "url":""
+}
+
+### curl -X PUT http://localhost:8080/api/content/1 -H "Content-Type: application/json" -d '{"id":1, "title":"My First Post BOOOOIII!", "desc":"My First Blog Post", "status":"IDEA", "contentType":"ARTICLE", "dateCreated":"2023-03-15T14:04:44.2609354", "dateUpdated":"2023-03-15T14:04:44.2909354", "url":""}'
+
+DELETE http://localhost:8080/api/content/2
